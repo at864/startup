@@ -19,3 +19,14 @@ In order for users to access their account, they need to first sign in with thei
 ScheJo stores user data such as events, special days, moods, and daily entries in an SQL database.
 ### WebSocket Data
 The daily weather information shown on the schedule portion of ScheJo is retrieved from an API.
+
+
+## HTML Deliverable
+For this deliverable, I built out the structure of my application using HTML
+Markup :    - *HTML Pages* 
+            - *Links* 
+            - *Text*
+            - *Images*
+            - *Login*
+            - *Database*
+            - *WebSocket*
