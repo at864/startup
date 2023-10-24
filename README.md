@@ -23,10 +23,9 @@ The daily weather information shown on the schedule portion of ScheJo is retriev
 
 ## HTML Deliverable
 For this deliverable, I built out the structure of my application using HTML
-Markup :    - *HTML Pages* 
-            - *Links* 
-            - *Text*
-            - *Images*
-            - *Login*
-            - *Database*
-            - *WebSocket*
+* **HTML Pages** : Five HTML pages for the main, login, guest, journal, and schedule pages.
+* **Text** : The application description, schedule events, and journal entries are represented by text blocks.
+* **Images** : The GitHub logo is included in every footer next to its corresponding link. The weather and moods are also shown as images. Sizing will be fixed when CSS is incorporated.
+* **Login** : Login has username and password input boxes and login or sign up buttons.
+* **Database** : The tables on the schedule and journal page will hold information pulled from the database.
+* **WebSocket** : The weather images will represent realtime weather.
