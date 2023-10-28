@@ -27,6 +27,10 @@ body {
     margin-top: 2vh;
     margin-bottom: 2vh;
   }
+
+  form {
+    flex-direction: column;
+  }
   
   footer {
     flex: 0 5vh;
@@ -68,6 +72,34 @@ body {
   #github {
     height: 2vh;
     width: auto;
+  }
+
+  .mood, .weather {
+    height: 4vh;
+    width: auto;
+    padding-left: 35%;
+    padding-right: 35%;
+  }
+
+  th {
+    font-family: 'League Spartan';
+    color: #85a0d5;
+    padding: 3vh 5vh;
+    border: 1px solid;
+    border-color: #85a0d5;
+  }
+
+  td {
+    font-family: 'Sanchez';
+    color: #85a0d5;
+    border: 1px solid;
+    border-color: #85a0d5;
+  }
+
+  table {
+    border: 1px solid;
+    border-color: #85a0d5;
+    border-collapse: collapse;
   }
   
 
