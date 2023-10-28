@@ -29,3 +29,14 @@ For this deliverable, I built out the structure of my application using HTML
 * **Login** : Login has username and password input boxes and login or sign up buttons.
 * **Database** : The tables on the schedule and journal page will hold information pulled from the database.
 * **WebSocket** : The weather images will represent realtime weather.
+
+
+## CSS Deliverable
+For this deliverable I properly styled the application into its final appearance.
+* **Header, footer, and main content body**
+* **Navigation elements** - I dropped the underlines and changed the color for anchor elements.
+* **Responsive to window resizing** - Used flex so website fits multiple screen sizes.
+* **Application elements** - Manipulated margins and padding to arrange whitespace and improve readability. Added borders to tables.
+* **Application text content** - Used League Spartan for headers and Sanchez for text.
+* **Application images** - Resized images to be smaller.
+* **Color** - Added a color scheme.
