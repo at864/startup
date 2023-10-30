@@ -4,7 +4,7 @@ let sad = "https://cdn-icons-png.flaticon.com/128/166/166527.png";
 let angry = "https://cdn-icons-png.flaticon.com/128/166/166563.png";
 
 let moods = ['happy', 'neutral', 'sad', 'angry'];
-let icons = [happy, neutral, sad, angry];
+let moodIcons = [happy, neutral, sad, angry];
 
 function changeMood(id){
     const currMood = document.getElementById(id).alt;
@@ -16,7 +16,7 @@ function changeMood(id){
         index = 0;
     }
 
-    document.getElementById(id).src = icons[index];
+    document.getElementById(id).src = moodIcons[index];
     document.getElementById(id).alt = moods[index];
 
 }
