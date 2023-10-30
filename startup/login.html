@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=League%20Spartan|Sanchez">
 
+    <script src="login.js"></script>
   </head>
   <body>
     <!-- Use header, main, and footer elements to give semantic structure -->
@@ -24,21 +25,18 @@
     </header>
 
     <main>
-        <form method="get" action="schedule.html">
-          <div>
-            <label for="username">username</label>
-            <input type="text" id="username" placeholder="enter username" />
-          </div>
-          <div>
-            <label for="password">password</label>
-            <input type="text" id="password" placeholder="enter password" />
-          </div>
-          <div>
-            <button type="submit">login</button>
-            <button type="submit">sign up</button>
-          </div>
-            
-          </form>
+        <div>
+          <label for="username">username</label>
+          <input type="text" id="username" placeholder="enter username" />
+        </div>
+        <div>
+          <label for="password">password</label>
+          <input type="text" id="password" placeholder="enter password" />
+        </div>
+        <div>
+          <button type="submit" onclick="login()">login</button>
+          <button type="submit" onclick ="signUp()">sign up</button>
+        </div>
     </main>
 
     <footer>

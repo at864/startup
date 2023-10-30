@@ -41,7 +41,7 @@ For this deliverable I properly styled the application into its final appearance
 * **Application images** - Resized images to be smaller.
 
 
-# JavaScript Deliverable
+## JavaScript Deliverable
 For this deliverable I implemented by JavaScript so that the application works for a single user. I also added placeholders for future technology.
 * **Login** - When you press enter, the login button, or sign up button it takes you to the schedule page.
 * **Database** - Displayed the schedule events, journal entries, and moods. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
