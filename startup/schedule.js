@@ -13,7 +13,7 @@ let scheduleEvents = {
     'Wednesday': "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     'Thursday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     'Friday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    'Saturday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    'Saturday': "saturdayEntry"
 };
 
 function getWeather(day) {
@@ -32,7 +32,8 @@ function showEvents(){
     document.getElementById("wedSched").value = scheduleEvents['Wednesday'];
     document.getElementById("thuSched").value = scheduleEvents['Thursday'];
     document.getElementById("friSched").value = scheduleEvents['Friday'];
-    document.getElementById("satSched").value = scheduleEvents['Saturday'];
+    document.getElementById("satSched").innerHTML = scheduleEvents['Saturday'];
+    console.log(scheduleEvents['Saturday']);
 }
 
 getWeather('sunWeather');
