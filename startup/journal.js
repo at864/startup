@@ -32,13 +32,13 @@ function changeMood(id){
 }
 
 function showEntries(){
-    document.getElementById("sunEntry").value = journalEntries['Sunday'];
-    document.getElementById("monEntry").value = journalEntries['Monday'];
-    document.getElementById("tueEntry").value = journalEntries['Tuesday'];
-    document.getElementById("wedEntry").value = journalEntries['Wednesday'];
-    document.getElementById("thuEntry").value = journalEntries['Thursday'];
-    document.getElementById("friEntry").value = journalEntries['Friday'];
-    document.getElementById("satEntry").value = journalEntries['Saturday'];
+    document.getElementById("sunEntry").innerHTML = journalEntries['Sunday'];
+    document.getElementById("monEntry").innerHTML = journalEntries['Monday'];
+    document.getElementById("tueEntry").innerHTML = journalEntries['Tuesday'];
+    document.getElementById("wedEntry").innerHTML = journalEntries['Wednesday'];
+    document.getElementById("thuEntry").innerHTML = journalEntries['Thursday'];
+    document.getElementById("friEntry").innerHTML = journalEntries['Friday'];
+    document.getElementById("satEntry").innerHTML = journalEntries['Saturday'];
 }
 
 showEntries();

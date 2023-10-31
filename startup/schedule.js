@@ -26,14 +26,13 @@ function getWeather(day) {
 }
 
 function showEvents(){
-    document.getElementById("sunSched").value = scheduleEvents['Sunday'];
-    document.getElementById("monSched").value = scheduleEvents['Monday'];
-    document.getElementById("tueSched").value = scheduleEvents['Tuesday'];
-    document.getElementById("wedSched").value = scheduleEvents['Wednesday'];
-    document.getElementById("thuSched").value = scheduleEvents['Thursday'];
-    document.getElementById("friSched").value = scheduleEvents['Friday'];
+    document.getElementById("sunSched").innerHTML = scheduleEvents['Sunday'];
+    document.getElementById("monSched").innerHTML = scheduleEvents['Monday'];
+    document.getElementById("tueSched").innerHTML = scheduleEvents['Tuesday'];
+    document.getElementById("wedSched").innerHTML = scheduleEvents['Wednesday'];
+    document.getElementById("thuSched").innerHTML = scheduleEvents['Thursday'];
+    document.getElementById("friSched").innerHTML = scheduleEvents['Friday'];
     document.getElementById("satSched").innerHTML = scheduleEvents['Saturday'];
-    console.log(scheduleEvents['Saturday']);
 }
 
 getWeather('sunWeather');
