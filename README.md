@@ -47,3 +47,13 @@ For this deliverable I implemented by JavaScript so that the application works f
 * **Database** - Displayed the schedule events, journal entries, and moods. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
 * **WebSocket** - I used the setWeather function to randomly choose a weather. This will be replaced with WebSocket weather later.
 * **Application logic** - The journal moods change based on the user's selections by clicking on the emoticon.
+
+
+## Service Deliverable
+For this deliverable I added backend enpoints that receives dates, calendar events, and journal entries and returns a daily weather forecast, all events, and all entries for the current week.
+* **Node.js/Express HTTP service** - done!
+* **Static middleware for fronted** -
+* **Calls to third party endpoints** - 
+* **Backend service endpoints** - 
+* **Frontend calls service endpoints** -
+
