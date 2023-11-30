@@ -43,7 +43,7 @@ For this deliverable I properly styled the application into its final appearance
 
 ## JavaScript Deliverable
 For this deliverable I implemented by JavaScript so that the application works for a single user. I also added placeholders for future technology.
-* **Login** - When you press the login or sign up button it takes you to the schedule page.
+* **Login** - When you click the login or sign up button it takes you to the schedule page. To login, one must use the previous username and password that was used for signing up.
 * **Database** - Displayed the schedule events, journal entries, and moods. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
 * **WebSocket** - I used the setWeather function to randomly choose a weather. This will be replaced with WebSocket weather later.
-* **Application logic** - The journal moods change based on the user's selections.
+* **Application logic** - The journal moods change based on the user's selections by clicking on the emoticon.
