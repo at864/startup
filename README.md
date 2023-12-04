@@ -52,8 +52,8 @@ For this deliverable I implemented by JavaScript so that the application works f
 ## Service Deliverable
 For this deliverable I added backend enpoints that receives dates, calendar events, and journal entries and returns a daily weather forecast, all events, and all entries for the current week.
 * **Node.js/Express HTTP service** - done!
-* **Static middleware for fronted** -
-* **Calls to third party endpoints** - 
-* **Backend service endpoints** - 
-* **Frontend calls service endpoints** -
+* **Static middleware for frontend** - done!
+* **Calls to third party endpoints** - I used Open-Meteo's weather forecast API and changed my weather icons accordingly to the fetched weather codes.
+* **Backend service endpoints** - Placeholders for 
+* **Frontend calls service endpoints** - I did this using the fetch function.
 
