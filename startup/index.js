@@ -20,7 +20,6 @@ apiRouter.get('/entries', (_req, res) => {
 });
 
 apiRouter.get('/moods', (_req, res) => {
-    console.log(moods);
 	res.send(moods);
 });
 
@@ -36,8 +35,7 @@ apiRouter.get('/moods', (_req, res) => {
 // });
 
 apiRouter.post('/mood', (req, res) => {
-	moods = updateMoods(req.body, moods);
-	res.send(moods);
+	moods = updateMoods(req.body);
 });
 
 app.use((_req, res) => {
@@ -68,10 +66,16 @@ let entries = {
     'Saturday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 };
 
-let moods = {'sunMood': 0,
-	'monMood': 0,
-	'tueMood': 0,
-	'wedMood': 0,
-	'thuMood': 0,
-	'friMood': 0,
-	'satMood': 0};
+let moods = {};
+
+// let moods = {'sunMood': 0,
+// 	'monMood': 0,
+// 	'tueMood': 0,
+// 	'wedMood': 0,
+// 	'thuMood': 0,
+// 	'friMood': 0,
+// 	'satMood': 0};
+
+function updateMoods(newMoods) {
+    moods = newMoods;
+}

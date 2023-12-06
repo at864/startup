@@ -25,17 +25,14 @@ let journalEntries = {
 };
 
 async function loadMoods() {
-    console.log("loading");
     try {
         const response = await fetch('/api/moods');
         storedMoods = await response.json();
 
-        console.log("fetching");
-
-        console.log(storedMoods);
-
         localStorage.setItem('storedMoods', JSON.stringify(storedMoods));
+        console.log("success load");
     } catch {
+        console.log("fail load");
         storedMoods = localStorage.getItem('storedMoods');
     }
 }
@@ -44,7 +41,6 @@ async function loadEntries() {
     try {
         const response = await fetch('/api/entries');
         journalEntries = await response.json();
-        console.log(journalEntries);
 
         localStorage.setItem('entries', JSON.stringify(journalEntries));
     } catch {
@@ -53,10 +49,26 @@ async function loadEntries() {
 }
 
 function updateMoods(){
+    if(storedMoods.length < 7){
+        storedMoods = localStorage.getItem('storedMoods');
+    }
     console.log(storedMoods);
     for (var key in storedMoods) {
         document.getElementById(key).src = moodIcons[storedMoods[key]];
         document.getElementById(key).alt = moods[storedMoods[key]];
+    }
+    localStorage.setItem('storedMoods', storedMoods);
+    (async () => await postMoods())();
+}
+
+async function postMoods() {
+    try {
+        const response = await fetch('/api/mood', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(storedMoods),
+        });
+    } catch {
     }
 }
 
@@ -69,6 +81,8 @@ function changeMood(id){
     } else {
         index = 0;
     }
+
+    print(storedMoods);
 
     storedMoods[id] = index;
     updateMoods();
@@ -87,7 +101,6 @@ function showEntries(){
     document.getElementById("satEntry").innerHTML = journalEntries['Saturday'];
 }
 
-console.log("about to load");
 loadMoods();
 loadEntries();
 updateMoods();
