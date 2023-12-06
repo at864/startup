@@ -18,6 +18,17 @@ let scheduleEvents = {
     'Saturday': "saturdayEntry"
 };
 
+async function loadEvents() {
+    try {
+        const response = await fetch('/api/events');
+        scheduleEvents = await response.json();
+
+        localStorage.setItem('events', JSON.stringify(scheduleEvents));
+    } catch {
+        scheduleEvents = localStorage.getItem('events');
+    }
+}
+
 function getLocation(){
     if (navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(showPosition);
@@ -109,4 +120,5 @@ getWeather('thuWeather');
 getWeather('friWeather');
 getWeather('satWeather');
 
+loadEvents();
 showEvents();
