@@ -24,6 +24,34 @@ let journalEntries = {
     'Saturday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 };
 
+async function loadMoods() {
+    console.log("loading");
+    try {
+        const response = await fetch('/api/moods');
+        storedMoods = await response.json();
+
+        console.log("fetching");
+
+        console.log(storedMoods);
+
+        localStorage.setItem('storedMoods', JSON.stringify(storedMoods));
+    } catch {
+        storedMoods = localStorage.getItem('storedMoods');
+    }
+}
+
+async function loadEntries() {
+    try {
+        const response = await fetch('/api/entries');
+        journalEntries = await response.json();
+        console.log(journalEntries);
+
+        localStorage.setItem('entries', JSON.stringify(journalEntries));
+    } catch {
+        journalEntries = localStorage.getItem('entries');
+    }
+}
+
 function updateMoods(){
     console.log(storedMoods);
     for (var key in storedMoods) {
@@ -59,5 +87,8 @@ function showEntries(){
     document.getElementById("satEntry").innerHTML = journalEntries['Saturday'];
 }
 
+console.log("about to load");
+loadMoods();
+loadEntries();
 updateMoods();
 showEntries();
