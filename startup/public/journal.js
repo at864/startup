@@ -6,6 +6,13 @@ let angry = "https://cdn-icons-png.flaticon.com/128/166/166563.png";
 let moods = ['happy', 'neutral', 'sad', 'angry'];
 let moodIcons = [happy, neutral, sad, angry];
 
+let storedMoods = {'sunMood': 0,
+                    'monMood': 0,
+                    'tueMood': 0,
+                    'wedMood': 0,
+                    'thuMood': 0,
+                    'friMood': 0,
+                    'satMood': 0};
 
 let journalEntries = {
     'Sunday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -17,6 +24,14 @@ let journalEntries = {
     'Saturday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 };
 
+function updateMoods(){
+    console.log(storedMoods);
+    for (var key in storedMoods) {
+        document.getElementById(key).src = moodIcons[storedMoods[key]];
+        document.getElementById(key).alt = moods[storedMoods[key]];
+    }
+}
+
 function changeMood(id){
     const currMood = document.getElementById(id).alt;
     console.log(typeof currMood);
@@ -27,8 +42,11 @@ function changeMood(id){
         index = 0;
     }
 
-    document.getElementById(id).src = moodIcons[index];
-    document.getElementById(id).alt = moods[index];
+    storedMoods[id] = index;
+    updateMoods();
+
+    // document.getElementById(id).src = moodIcons[index];
+    // document.getElementById(id).alt = moods[index];
 }
 
 function showEntries(){
@@ -41,4 +59,5 @@ function showEntries(){
     document.getElementById("satEntry").innerHTML = journalEntries['Saturday'];
 }
 
+updateMoods();
 showEntries();
