@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const DB = require('./database.js');
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -7,19 +8,31 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
+// Test that you can connect to the database
+(async function testConnection() {
+    await client.connect();
+    await DB.command({ ping: 1 });
+  })().catch((ex) => {
+    console.log(`Unable to connect to database because ${ex.message}`);
+    process.exit(1);
+  });
+
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 //GET
-apiRouter.get('/events', (_req, res) => {
+apiRouter.get('/events', async (_req, res) => {
+    const events = await DB.getEvents();
 	res.send(events);
 });
 
-apiRouter.get('/entries', (_req, res) => {
+apiRouter.get('/entries', async (_req, res) => {
+    const entries = await DB.getEntries();
 	res.send(entries);
 });
 
-apiRouter.get('/moods', (_req, res) => {
+apiRouter.get('/moods', async (_req, res) => {
+    const moods = await DB.getMoods();
 	res.send(moods);
 });
 
@@ -35,7 +48,7 @@ apiRouter.get('/moods', (_req, res) => {
 // });
 
 apiRouter.post('/mood', (req, res) => {
-	moods = updateMoods(req.body);
+    DB.setMoods(req.body);
 });
 
 app.use((_req, res) => {
@@ -46,36 +59,3 @@ app.listen(port, () => {
 	console.log(`Listening on port ${port}`);
 });
 
-let events = {
-    'Sunday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    'Monday': "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    'Tuesday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    'Wednesday': "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    'Thursday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    'Friday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    'Saturday': "saturdayEntry"
-};
-
-let entries = {
-    'Sunday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    'Monday': "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    'Tuesday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    'Wednesday': "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    'Thursday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    'Friday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    'Saturday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-};
-
-let moods = {};
-
-// let moods = {'sunMood': 0,
-// 	'monMood': 0,
-// 	'tueMood': 0,
-// 	'wedMood': 0,
-// 	'thuMood': 0,
-// 	'friMood': 0,
-// 	'satMood': 0};
-
-function updateMoods(newMoods) {
-    moods = newMoods;
-}

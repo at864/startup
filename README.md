@@ -54,6 +54,6 @@ For this deliverable I added backend enpoints that receives dates, calendar even
 * **Node.js/Express HTTP service** - done!
 * **Static middleware for frontend** - done!
 * **Calls to third party endpoints** - I used Open-Meteo's weather forecast API and changed my weather icons accordingly to the fetched weather codes.
-* **Backend service endpoints** - Placeholders for 
-* **Frontend calls service endpoints** - I did this using the fetch function.
+* **Backend service endpoints** - Created get functions for entries, events, and moods. Created a post function to update moods.
+* **Frontend calls service endpoints** - I did this using the fetch function. The frontend calls service endpoints to get events, entries, and moods.
 
