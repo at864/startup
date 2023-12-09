@@ -8,15 +8,6 @@ async function main() {
   const db = client.db('rental');
   const collection = db.collection('house');
 
-  // Test that you can connect to the database
-  (async function testConnection() {
-    await client.connect();
-    await db.command({ ping: 1 });
-  })().catch((ex) => {
-    console.log(`Unable to connect to database with ${url} because ${ex.message}`);
-    process.exit(1);
-  });
-
   // Insert a document
   const house = {
     name: 'Beachfront views',
