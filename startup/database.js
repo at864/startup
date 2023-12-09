@@ -25,8 +25,7 @@ function getEntries() {
     limit: 1,
   };
   const cursor = entryCollection.find(query, options);
-  const results = cursor.toArray();
-  console.log(results);
+  const results = cursor.delete("_id");
   return results;
 }
 
@@ -37,8 +36,7 @@ function getEvents() {
     limit: 1,
   };
   const cursor = eventCollection.find(query, options);
-  const results = cursor.toArray();
-  console.log(results);
+  const results = cursor.delete("_id");
   return results;
 }
 
@@ -49,8 +47,7 @@ function getMoods() {
     limit: 1,
   };
   const cursor = moodCollection.find(query, options);
-  const results = cursor.toArray();
-  console.log(results);
+  const results = cursor.delete("_id");
   return results;
 }
 
