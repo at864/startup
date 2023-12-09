@@ -8,15 +8,6 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-// Test that you can connect to the database
-(async function testConnection() {
-    await client.connect();
-    await DB.command({ ping: 1 });
-  })().catch((ex) => {
-    console.log(`Unable to connect to database because ${ex.message}`);
-    process.exit(1);
-  });
-
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 

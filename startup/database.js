@@ -4,43 +4,60 @@ const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('startup');
-const events = {
-        'Sunday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        'Monday': "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        'Tuesday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        'Wednesday': "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        'Thursday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        'Friday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        'Saturday': "saturdayEntry"
-    };
-
-const entries = {
-    'Sunday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    'Monday': "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    'Tuesday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    'Wednesday': "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    'Thursday': "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    'Friday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    'Saturday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-};
-
-const moods = {'sunMood': 0,
-'monMood': 0,
-'tueMood': 0,
-'wedMood': 0,
-'thuMood': 0,
-'friMood': 0,
-'satMood': 0};
+const eventCollection = db.collection('event');
+const entryCollection = db.collection('entry');
+const moodCollection = db.collection('mood');
 
 
-client.connect(err => {
-    const collection = client.db("test").collection("devices");
+// Test that you can connect to the database
+(async function testConnection() {
+    await client.connect();
+    await DB.command({ ping: 1 });
+  })().catch((ex) => {
+    console.log(`Unable to connect to database with ${url} because ${ex.message}`);
+    process.exit(1);
+  });
 
-  // ... perform actions on the DB collection
 
-    async function updateMoods(newMoods) {
-        moods = newMoods;
-    }
+function getEntries() {
+  const query = {};
+  const options = {
+    limit: 1,
+  };
+  const cursor = entryCollection.find(query, options);
+  const results = cursor.toArray();
+  console.log(results);
+  return results;
+}
 
-client.close();
-});
+
+function getEvents() {
+  const query = {};
+  const options = {
+    limit: 1,
+  };
+  const cursor = eventCollection.find(query, options);
+  const results = cursor.toArray();
+  console.log(results);
+  return results;
+}
+
+
+function getMoods() {
+  const query = {};
+  const options = {
+    limit: 1,
+  };
+  const cursor = moodCollection.find(query, options);
+  const results = cursor.toArray();
+  console.log(results);
+  return results;
+}
+
+
+async function setMoods(newMoods) {
+  const filter = { _id: 0x6573fdbecf988dc38935bf3b };
+  const result = await moodCollection.replaceOne(filter, newMoods);
+}
+
+module.exports = {getEvents, getEntries, getMoods, setMoods};
