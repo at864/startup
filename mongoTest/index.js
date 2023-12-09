@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const config = require('./dbConfig.json');
+const config = require('./.config/git/ignore/dbConfig.json');
 
 async function main() {
   // Connect to the database cluster

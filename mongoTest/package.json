@@ -13,5 +13,6 @@
     "n": "^9.2.0",
     "npm": "^10.2.5"
   },
+  "devDependencies": {},
   "description": ""
 }
