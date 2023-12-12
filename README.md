@@ -57,3 +57,17 @@ For this deliverable I added backend enpoints that receives dates, calendar even
 * **Backend service endpoints** - Created get functions for entries, events, and moods. Created a post function to update moods.
 * **Frontend calls service endpoints** - I did this using the fetch function. The frontend calls service endpoints to get events, entries, and moods.
 
+
+## DB Deliverable
+For this deliverable I stored the events, entries, and moods in the database.
+* **MongoDB Atlas database creaded** - done!
+* **Endpoints for data** - My stubbed out endpoints now process the data and send it to Mongo.
+* **Stores data in MongoDB** - done!
+
+
+## Login Deliverable
+For this deliverable I associate the moods with the logged in user.
+* **User registration** - Creates a new account in the database.
+* **Existing user** - Store the moods under the same user if the user already exists.
+* **Use MongoDB to store credentials** - Store both user and their moods.
+* **restricts functionality** - Your moods will not be stored until you have logged in.
