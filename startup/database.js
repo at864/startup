@@ -3,58 +3,101 @@ const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
+
 const db = client.db('startup');
 const eventCollection = db.collection('event');
 const entryCollection = db.collection('entry');
 const moodCollection = db.collection('mood');
+const userCollection = db.collection('user');
 
 
 // Test that you can connect to the database
 (async function testConnection() {
     await client.connect();
-    await DB.command({ ping: 1 });
+    await db.command({ ping: 1 });
   })().catch((ex) => {
     console.log(`Unable to connect to database with ${url} because ${ex.message}`);
     process.exit(1);
-  });
+});
+
+function getUser(userName) {
+  return userCollection.findOne({ username: userName });
+}
+
+function getUserByToken(token) {
+  return userCollection.findOne({ token: token });
+}
+
+async function createUser(userName, password) {
+  // Hash the password before we insert it into the database
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    username: userName,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await userCollection.insertOne(user);
+
+  createUserMoods(userName);
+
+  return user;
+}
+
+async function createUserMoods(userName) {
+  const mood = {
+    username: userName,
+    'sunMood': 0,
+    'monMood': 0,
+    'tueMood': 0,
+    'wedMood': 0,
+    'thuMood': 0,
+    'friMood': 0,
+    'satMood': 0
+  };
+  await moodCollection.insertOne(mood);
+}
 
 
-function getEntries() {
-  const query = {};
+function getEntries(userName) {
+  const query = {username: userName};
   const options = {
     limit: 1,
   };
   const cursor = entryCollection.find(query, options);
   const results = cursor.delete("_id");
+  results = results.delete("username");
   return results;
 }
 
 
-function getEvents() {
-  const query = {};
+function getEvents(userName) {
+  const query = {username: userName};
   const options = {
     limit: 1,
   };
   const cursor = eventCollection.find(query, options);
   const results = cursor.delete("_id");
+  results = results.delete("username");
   return results;
 }
 
 
-function getMoods() {
-  const query = {};
+function getMoods(userName) {
+  const query = {username: userName};
   const options = {
     limit: 1,
   };
   const cursor = moodCollection.find(query, options);
   const results = cursor.delete("_id");
+  results = results.delete("username");
   return results;
 }
 
 
-async function setMoods(newMoods) {
-  const filter = { _id: 0x6573fdbecf988dc38935bf3b };
+async function setMoods(newMoods, userName) {
+  const filter = { username: userName };
   const result = await moodCollection.replaceOne(filter, newMoods);
 }
 
-module.exports = {getEvents, getEntries, getMoods, setMoods};
+module.exports = {getUser, getUserByToken, createUser, getEvents, getEntries, getMoods, setMoods};

@@ -63,6 +63,7 @@ function updateMoods(){
 
 async function postMoods() {
     try {
+        storedMoods["username"] = (await fetch('/user/userName'))["user"];
         const response = await fetch('/api/mood', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
