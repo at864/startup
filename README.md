@@ -71,3 +71,10 @@ For this deliverable I associate the moods with the logged in user.
 * **Existing user** - Store the moods under the same user if the user already exists.
 * **Use MongoDB to store credentials** - Store both user and their moods.
 * **restricts functionality** - Your moods will not be stored until you have logged in.
+
+## WebSocket deliverable
+
+* **Backend listens for WebSocket connection** - in progress
+* **Frontend makes WebSocket connection** - in progress
+* **Data sent over WebSocket connection** - in progress
+* **WebSocket data displayed** - in progress
