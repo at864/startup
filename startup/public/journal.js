@@ -24,6 +24,8 @@ let journalEntries = {
     'Saturday': "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 };
 
+let varNames = new Set(['sunMood', 'monMood', 'tueMood', 'wedMood', 'thuMood', 'friMood']);
+
 async function loadMoods() {
     try {
         const response = await fetch('/api/moods');
@@ -54,8 +56,11 @@ function updateMoods(){
     }
     console.log(storedMoods);
     for (var key in storedMoods) {
-        document.getElementById(key).src = moodIcons[storedMoods[key]];
-        document.getElementById(key).alt = moods[storedMoods[key]];
+        if(varNames.has(key)){
+            document.getElementById(key).src = moodIcons[storedMoods[key]];
+            document.getElementById(key).alt = moods[storedMoods[key]];
+        }
+        
     }
     localStorage.setItem('storedMoods', storedMoods);
     (async () => await postMoods())();
@@ -63,19 +68,25 @@ function updateMoods(){
 
 async function postMoods() {
     try {
-        storedMoods["username"] = (await fetch('/user/userName'))["user"];
+        
+        const reply = (await fetch('/user/userName')).json();
+        console.log(`reply ${JSON.stringify(reply)}`);
+        storedMoods["username"] = reply.user;
+        console.log(`moods ${storedMoods.json()}`);
         const response = await fetch('/api/mood', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(storedMoods),
         });
     } catch {
+        console.log("couldn't update mood to DB");
     }
 }
 
 function changeMood(id){
     const currMood = document.getElementById(id).alt;
-    console.log(typeof currMood);
+    console.log(currMood);
+    console.log(storedMoods);
     var index = moods.indexOf(currMood);
     if(index < moods.length - 1){
         index++;
