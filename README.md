@@ -73,7 +73,7 @@ For this deliverable I associate the moods with the logged in user.
 * **restricts functionality** - Your moods will not be stored until you have logged in.
 
 ## WebSocket deliverable
-
+I haven't finished this deliverable yet, I just turned it in to work on the React assignments while my login deliverable is being graded.
 * **Backend listens for WebSocket connection** - in progress
 * **Frontend makes WebSocket connection** - in progress
 * **Data sent over WebSocket connection** - in progress
