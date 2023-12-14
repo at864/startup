@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">  
+
+    function Greeting(props) {
+        const isLoggedIn = props.isLoggedIn;
+        const isWrong = props.isWrong;
+        if(isWrong) {
+            return <h1>Wrong button</h1>;
+        } else {
+           if (isLoggedIn) {
+          return <h1>Welcome back!</h1>;
+        }
+        return <h1>Please sign up.</h1>; 
+        }
+        
+    }
+
+    function LoginButton(props) {
+        return (
+          <button onClick={props.onClick}>
+            Login
+          </button>
+        );
+    }
+      
+    function LogoutButton(props) {
+        return (
+          <button onClick={props.onClick}>
+            Logout
+          </button>
+        );
+    }
+
+    function WrongButton(props) {
+        return (
+            <button onClick={props.onClick}>
+                Not this one
+            </button>
+        );
+    }
+
+    class LoginControl extends React.Component {
+      constructor(props) {
+        super(props);
+        this.handleLoginClick = this.handleLoginClick.bind(this);
+        this.handleLogoutClick = this.handleLogoutClick.bind(this);
+        this.handleWrongClick = this.handleWrongClick.bind(this);
+        this.state = {isLoggedIn: false, isWrong: false};
+      }
+    
+      handleLoginClick() {
+        this.setState({isLoggedIn: true, isWrong: false});
+      }
+    
+      handleLogoutClick() {
+        this.setState({isLoggedIn: false, isWrong: false});
+      }
+
+      handleWrongClick() {
+        this.setState({isLoggedIn: this.state.isLoggedIn, isWrong: true});
+      }
+    
+      render() {
+        const isLoggedIn = this.state.isLoggedIn;
+        let button;
+        let wrongButton;
+        if (isLoggedIn) {
+          button = <LogoutButton onClick={this.handleLogoutClick} />;
+          wrongButton = <WrongButton onClick={this.handleWrongClick} />;
+        } else {
+          button = <LoginButton onClick={this.handleLoginClick} />;
+          wrongButton = <WrongButton onClick={this.handleWrongClick} />;
+        }
+    
+        return (
+          <div>
+            <Greeting isLoggedIn={isLoggedIn} />
+            {button} {wrongButton}
+          </div>
+        );
+      }
+    }
+    
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<LoginControl/>);
+    </script>
+  </body>
+</html>
