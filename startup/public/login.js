@@ -1,33 +1,17 @@
+const { compareSync } = require("bcrypt");
+
 async function login() {
     loginOrCreate(`/api/auth/login`);
-
-
-    // const usernameInput = document.querySelector("#username");
-    // const passwordInput = document.querySelector("#password");
-
-    // const username = localStorage.getItem("username");
-    // const password = localStorage.getItem("password");
-
-    // if(usernameInput.value == username && passwordInput.value == password){
-    //     window.location.href = "schedule.html";
-    // } 
 }
 
 async function signUp() {
     loginOrCreate(`/api/auth/create`);
-
-    // const username = document.querySelector("#username");
-    // localStorage.setItem("username", username.value);
-
-    // const password = document.querySelector("#password");
-    // localStorage.setItem("password", password.value);
-
-    // window.location.href = "schedule.html";
 }
 
 async function loginOrCreate(endpoint) {
     const userName = document.querySelector('#username')?.value;
     const password = document.querySelector('#password')?.value;
+    console.log(`credentials ${userName} ${password}`);
     const response = await fetch(endpoint, {
       method: 'post',
       body: JSON.stringify({ username: userName, password: password }),
@@ -40,6 +24,6 @@ async function loginOrCreate(endpoint) {
       localStorage.setItem('username', userName);
       window.location.href = 'schedule.html';
     } else {
-      console.log("nope");
+      console.log("existing user or incorrect credentials");
     }
   }

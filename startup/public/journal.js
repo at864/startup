@@ -51,9 +51,9 @@ async function loadEntries() {
 }
 
 function updateMoods(){
-    if(storedMoods.length < 7){
-        storedMoods = localStorage.getItem('storedMoods');
-    }
+    // if(storedMoods.length < 7){
+    //     storedMoods = localStorage.getItem('storedMoods');
+    // }
     console.log(storedMoods);
     for (var key in storedMoods) {
         if(varNames.has(key)){
@@ -62,16 +62,20 @@ function updateMoods(){
         }
         
     }
+
+    for (var day in varNames) {
+        if(!(storedMoods.has(day))){
+            storedMoods[day] = 0;
+        }
+    }
     localStorage.setItem('storedMoods', storedMoods);
     (async () => await postMoods())();
 }
 
 async function postMoods() {
     try {
-        
-        const reply = (await fetch('/user/userName')).json();
-        console.log(`reply ${JSON.stringify(reply)}`);
-        storedMoods["username"] = reply.user;
+        console.log(`posting moods ${storedMoods}`);
+        storedMoods["username"] = localStorage.getItem('username');
         console.log(`moods ${storedMoods.json()}`);
         const response = await fetch('/api/mood', {
             method: 'POST',

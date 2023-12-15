@@ -21,8 +21,8 @@ apiRouter.post('/auth/create', async (req, res) => {
 	  res.status(409).send({ msg: 'Existing user' });
 	} else {
 	  const user = await DB.createUser(req.body.username, req.body.password);
-	  DB.removeCurrUser();
-	  DB.setCurrUser(req.body.username);
+	//   DB.removeCurrUser();
+	//   DB.setCurrUser(req.body.username);
   
 	  // Set the cookie
 	  setAuthCookie(res, user.token);
@@ -37,8 +37,8 @@ apiRouter.post('/auth/create', async (req, res) => {
   apiRouter.post('/auth/login', async (req, res) => {
 	const user = await DB.getUser(req.body.username);
 	if (user) {
-		DB.removeCurrUser();
-		DB.setCurrUser(req.body.username);
+		// DB.removeCurrUser();
+		// DB.setCurrUser(req.body.username);
 	  if (await bcrypt.compare(req.body.password, user.password)) {
 		setAuthCookie(res, user.token);
 		res.send({ id: user._id });
@@ -56,10 +56,10 @@ apiRouter.post('/auth/create', async (req, res) => {
   
   // GetUser returns information about a user
   apiRouter.get('/user/userName', async (req, res) => {
-	const user = await DB.getUser(req.params.userName);
+	const user = await DB.getUser(req.params.username);
 	if (user) {
 	  const token = req?.cookies.token;
-	  res.send({ user: user.userName, authenticated: token === user.token });
+	  res.send({ user: user.username, authenticated: token === user.token });
 	  return;
 	}
 	res.status(404).send({ msg: 'Unknown' });
