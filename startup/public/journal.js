@@ -74,9 +74,8 @@ function updateMoods(){
 
 async function postMoods() {
     try {
-        console.log(`posting moods ${storedMoods}`);
         storedMoods["username"] = localStorage.getItem('username');
-        console.log(`moods ${storedMoods.json()}`);
+        console.log(`moods ${JSON.stringify(storedMoods)}`);
         const response = await fetch('/api/mood', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
